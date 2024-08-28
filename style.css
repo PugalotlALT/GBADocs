@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
+* {
+	font-family: "Source Sans 3", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: <weight>;
+	font-style: normal;
+	color: rgb(18, 9, 42);
+}
+
+body {
+	background-color: rgb(222, 217, 247);
+}
+
+h1 {
+	text-align: center;
+}
