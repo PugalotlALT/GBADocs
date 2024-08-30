@@ -30,11 +30,40 @@
 	
 	<br><br>
 	
-	For this tutorial specifically we use a subset of Arm’s instruction set called Thumb. This is a mode in the processor that reduces the instruction set to 16-bit instructions instead of the traditional 32-bit instructions of traditional Arm Assembly.
+	For this tutorial specifically we use a subset of Arm’s instruction set called Thumb. This is a mode in the processor 
+	that reduces the instruction set to 16-bit instructions instead of the traditional 32-bit instructions of traditional 
+	Arm Assembly. This is especially beneficial for devices with limited ROM space such as the GBA. However, many of the 
+	concepts and code snippets can be edited to work with the regular Arm instruction set.
+
+	<br><br>
+	
+	While I try to explain all the code snippets present in this tutorial, some basic understanding of Assembly is required 
+	to follow along with this guide. Some amazing resources to learn Assembly from scratch include the 
+	<a href="https://cpu.land/">Putting the “You” in CPU</a> site by HackClub or the <a href="https://chortle.ccsu.edu/assemblytutorial/">
+	Programmed Introduction to MIPS Assembly Language</a>, a tutorial for another instruction set.
 	
 	<br><br>
 	
-	<b>TO BE CONTINUED...</b>
+	<h1>Tools</h1>
+	
+	Throughout the tutorial I will introduce tools to do specific tasks such as sprite editing and compilation. However, 
+	there are some prerequisite tools required before starting. These include:
+	
+	<h1>vasm</h1>
+
+	<a href="http://sun.hasenbraten.de/vasm/index.php?view=binrel">vasm</a> is the compiler we will use for the duration of 
+	this tutorial. This tutorial uses “vasmarm_std_Win64.zip” specifically, but other builds may work as well. You can run 
+	this by extracting the ZIP and copying the EXE to your working directory or adding it to your path on Windows.
+	
+	<h1>GBA Emulator</h1>
+	
+	To run your code quickly without having to use a flash cart on a real GBA you can use a GBA emulator. The one that I 
+	primarily use and recommend is <a href="https://mgba.io/">mGBA</a>. This emulator is nearly fully accurate to the real 
+	GBA and has support for simple debugging. 
+	
+	<br><br>
+	
+	Enough theory, in the next part we will create our first working(?) GBA ROM. Stay tuned!
 	</p>
 </body>
 
