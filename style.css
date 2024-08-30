@@ -15,3 +15,15 @@ body {
 h1 {
 	text-align: center;
 }
+
+.column {
+	float: left;
+	width: 33.33%;
+}
+
+
+
+.row {
+	text-align: center;
+	vertical-align: middle;
+}

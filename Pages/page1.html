@@ -20,11 +20,40 @@
 	Between 0x04000000 - 0x040003FE are the I/O registers or Input/Output registers. Usually 16 bits in length, these are a 
 	group of registers used for controlling the functions of the GBA such as visible screens and keypad inputs.
 	
+	<h1>Palette RAM</h1>
+	Between 0x05000000 - 0x050003FF is the Palette RAM. This area stores the palettes, or list of colours used by sprites 
+	(we will cover more about this section later).
+	
+	<h1>VRAM</h1>
+	Between 0x06000000 - 0x06017FFF is VRAM, or Video Memory. If you want to display something on the screen, this is the memory 
+	block you’ll need to write to, whether that be bitmap pixels or tiles (both of which we will cover later).
+	
+	<h1>OAM</h1>
+	Between 0x07000000 - 0x070003FF is OAM, or Object Attribute Memory. This memory block stores a list of “objects”, sprites to 
+	display on the screen which can be moved and manipulated similar to objects in a traditional game engine.
+	
 	<br><br>
 	
-	<b>TO BE CONTINUED...</b>
+	There are some extra sections as well such as the Game Pak ROM but these are not necessary to know to code a basic GBA game.
 	
+	<br><br>
 	
+	Now we know about VRAM, Palette RAM and OAM, but how do these combine to display stuff on the screen? We’ll cover that in 
+	the next part. Stay tuned!
+	
+	<br><br>
+	
+	<div class="row">
+		<div class="column">
+			<a href="./page0.html">Page 0: An Introduction</a>
+		</div>
+		<div class="column">
+			Page 1: GBA Memory
+		</div>
+		<div class="column">
+			TO BE CONTINUED...
+		</div>
+	</div> 
 	
 </body>
 
