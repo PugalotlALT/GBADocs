@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+	<h1>Part 2: GBA Modes</h1>
+	
+	The GBA can display data on the 240x160px screen in a variety of ways known as modes. There are six of these modes, 3 being 
+	bitmap and 3 being tile modes and are numbered 0 to 5.
+	
+	<h1>Bitmap</h1>
+	Bitmap modes involve the manipulation of pixels on the screen and are numbered 3 to 5. Mode 3 involves writing a 15 bit RGB 
+	value to any point in VRAM. Mode 4 involves writing an 8 bit reference to a RGB value stored in palette RAM and allows for 
+	a backbuffer (two screens available, so you can draw on one screen while displaying the other). Mode 5 has 15 bit RGB values 
+	as well as a backbuffer, but the screen is shrunk to 160x128 due to the larger space necessary.
+	
+	<h1>Tiles</h1>
+	Tile modes involve writing references to tile maps stored in VRAM and are numbered 0 to 2. Tile modes can contain between 2 
+	to 4 layers which allow for layering (duh) and turning on and off different tiles. Mode 0 has 4 regular background layers 
+	which allow for scrolling but not rotation or scaling. Mode 1 has 3 backgrounds, 1 which allows rotation and scaling and 2 
+	regular backgrounds. Mode 2 contains 2 rotatable and scalable backgrounds.
+	
+	<h1>BGs and Objects</h1>
+	As mentioned above, in Modes 0 to 2 you can enable backgrounds and objects. These are able to be turned on and off using one 
+	of the I/O registers, scrolled and rotated and scaled depending on what type of mode is set. Similar to backgrounds, objects 
+	can also be turned on and off. This effect can be used to create GUIs and title screens quickly without having to clear the 
+	screen.
+	
+	<br><br>
+	
+	Of course, there are many more nuances to these modes such as BG priority and character blocks. However, enough theory, 
+	let’s start working on our first GBA ROM. Stay tuned!
+	
+	<br><br>
+	
+	<div class="row">
+		<div class="column">
+			<a href="./page1.html">Part 1: GBA Memory</a>
+		</div>
+		<div class="column">
+			Part 2: GBA Modes
+		</div>
+		<div class="column">
+			TO BE CONTINUED...
+		</div>
+	</div> 
+	
+</body>
+
+</html>
