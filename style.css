@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
 * {
 	font-family: "Source Sans 3", sans-serif;
@@ -21,9 +22,16 @@ h1 {
 	width: 33.33%;
 }
 
-
-
 .row {
 	text-align: center;
 	vertical-align: middle;
+}
+
+pre {
+	white-space: pre-wrap;
+	background: rgb(228, 231, 247);
+	font-family: "Source Code Pro", monospace;
+	font-optical-sizing: auto;
+	font-weight: <weight>;
+	font-style: normal;
 }

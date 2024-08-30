@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+	<h1>Part 3: Our first ROM</h1>
+	
+	The time has finally come for us to write our first program for the GBA. If you haven’t already installed the 
+	prerequisite software you can find a list of required software <a href="./page0.html">here</a>. If you’re all ready, 
+	create a file titled “Example1.asm” and open it in your text editor of choice. With your file open, paste the following 
+	code below. Alternatively, you can download a copy of this program <a href="../Examples/Example1.asm">here</a>.
+	
+	<pre>
+.org 0x08000000
+
+b SetThumbMode
+
+.space 188
+
+SetThumbMode:
+	adr r0, Main
+	add r0, r0, #1
+	bx r0			;Sets code to Thumb mode
+
+	.thumb
+Main:
+	ldr r0, DisplayAddress
+	ldr r1, Mode3BG2
+	str r1, [r0,#0]		;Sets display mode to Mode 3 on BG2
+	
+	ldr r0, VRAMAddress
+	ldr r1, Colour
+	ldr r2, CanvasSizeDiv3	;Stores the VRAM address and colour to write
+	
+DrawLoop:
+	strh r1,[r0,#0]		;Writes the colour to the VRAM address
+	add r0, r0, #6		;Moves 3 pixels forward
+	sub r2, r2, #1		;Minus one from the canvas counter
+	bne DrawLoop
+	
+Infinite:
+	b Infinite
+	
+	.align 4
+DisplayAddress:
+	.long 0x4000000		;The first I/O register
+	
+VRAMAddress:
+	.long 0x6000000		;The start of VRAM
+	
+Mode3BG2:
+	.int 0x0403		;The I/O command to set Mode 3
+	
+Colour:
+	.long 0x7AFB		;The colour to display
+	
+CanvasSizeDiv3:
+	.long 0x3200		;The canvas counter divided by 3
+	</pre>
+
+	Once you have copied this code, open up a command prompt in your current directory and run the following command (also copy
+	the vasm EXE from the first part to this directory if you have not added it to the PATH):
+	
+	<pre>
+vasmarm_std.exe Example1.asm -m7tdmi -noialign -chklabels -nocase -Fbin -o Example1.gba
+	</pre>
+	
+	You should now see a file called "Example1.gba" in your directory. Run this file in your emulator of choice, and if you see
+	vertical purple lines on your screen: Congratulations! You have successfully made your first GBA ROM. But how exactly does
+	this code work? That is what we will discuss in the next part of this series. Stay tuned!
+	<br><br>
+	
+	<div class="row">
+		<div class="column">
+			<a href="./page2.html">Part 2: GBA Modes</a>
+		</div>
+		<div class="column">
+			<a href="../index.html">Part 3: Our first ROM</a>
+		</div>
+		<div class="column">
+			TO BE CONTINUED...
+		</div>
+	</div> 
+	
+</body>
+
+</html>

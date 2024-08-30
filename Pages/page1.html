@@ -12,23 +12,23 @@
 	some). Instead, data is displayed and read by storing and loading from memory blocks and special I/O register addresses. 
 	These blocks are each designated for specific purposes which are listed below.
 	
-	<h1>WRAM</h1>
+	<h2>WRAM</h2>
 	Between 0x02000000 - 0x0203FFFF and 0x03000000 - 0x03007FFF is WRAM, or Working RAM. This is the block in memory which programs 
 	are able to use freely to store whatever data they so desire.
 	
-	<h1>I/O Registers</h1>
+	<h2>I/O Registers</h2>
 	Between 0x04000000 - 0x040003FE are the I/O registers or Input/Output registers. Usually 16 bits in length, these are a 
 	group of registers used for controlling the functions of the GBA such as visible screens and keypad inputs.
 	
-	<h1>Palette RAM</h1>
+	<h2>Palette RAM</h2>
 	Between 0x05000000 - 0x050003FF is the Palette RAM. This area stores the palettes, or list of colours used by sprites 
 	(we will cover more about this section later).
 	
-	<h1>VRAM</h1>
+	<h2>VRAM</h2>
 	Between 0x06000000 - 0x06017FFF is VRAM, or Video Memory. If you want to display something on the screen, this is the memory 
 	block you’ll need to write to, whether that be bitmap pixels or tiles (both of which we will cover later).
 	
-	<h1>OAM</h1>
+	<h2>OAM</h2>
 	Between 0x07000000 - 0x070003FF is OAM, or Object Attribute Memory. This memory block stores a list of “objects”, sprites to 
 	display on the screen which can be moved and manipulated similar to objects in a traditional game engine.
 	
@@ -48,7 +48,7 @@
 			<a href="./page0.html">Part 0: An Introduction</a>
 		</div>
 		<div class="column">
-			Part 1: GBA Memory
+			<a href="../index.html">Part 1: GBA Memory</a>
 		</div>
 		<div class="column">
 			<a href="./page2.html">Part 2: GBA Modes</a>
