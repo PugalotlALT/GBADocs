@@ -7,6 +7,8 @@
 	font-weight: <weight>;
 	font-style: normal;
 	color: rgb(18, 9, 42);
+	text-align: justify;
+	text-justify: inter-word;
 }
 
 body {
@@ -18,6 +20,8 @@ h1 {
 }
 
 .column {
+	text-align: center;
+	vertical-align: middle;
 	float: left;
 	width: 33.33%;
 }
@@ -28,6 +32,7 @@ h1 {
 }
 
 pre {
+	text-align: left;
 	white-space: pre-wrap;
 	background: rgb(228, 231, 247);
 	font-family: "Source Code Pro", monospace;

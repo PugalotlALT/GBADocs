@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+	<h1>Part 4: Our first ROM - An explanation</h1>
+	
+	In the previous section we created our first ROM which displays lines down the screen. But how exactly does this program 
+	work? This part will cover the previous code step by step with explanations of how it works. Get ready for some explaining!
+	
+	<pre>
+.org 0x08000000
+
+b SetThumbMode
+
+.space 188
+	</pre>
+	
+	This section indicates the code should be placed at the address 0x08000000, the start of the ROM area. It then jumps to the 
+	start of the program (ARM uses "b" for branch instead of the traditional "jmp" command on other architectures. We then allocate 
+	188 bytes for the GBA header. Why do we do that? Stay tuned!
+	
+	<pre>
+SetThumbMode:
+	adr r0, Main
+	add r0, r0, #1	;#1 represents the constant 1
+	bx r0			;Sets code to Thumb mode
+
+	.thumb
+	</pre>
+	
+	The GBA doesn't start in THUMB mode, so we must set it to THUMB mode manually. This is done by using a bx (Branch and eXchange) 
+	instruction. This instruction sets the program counter (where the program is) to the supplied register as well as changing the 
+	program state to ARM or THUMB. To set the mode we must change the first bit (the smallest) to 0 for ARM or 1 for THUMB. We 
+	achieve this by loading the address of our Main function into r0 (Register 0) and add 1. We know this sets the smallest bit to 
+	1 as ARM instructions are 4 bytes in length. We then run the bx command to jump to our code. The ".thumb" tells the compiler 
+	that the rest of our code is THUMB machine code.
+	
+	<pre>
+Main:
+	ldr r0, DisplayAddress
+	ldr r1, Mode3BG2
+	str r1, [r0,#0]		;Sets display mode to Mode 3 on BG2
+	</pre>
+	
+	Before we draw anything to the screen we need to set the GBA to the correct mode. This is done by setting the I/O register at 
+	0x4000000 to the value 0x0403. I won't go into too much detail here so if you want to learn more, check out the description 
+	<a href="https://www.coranac.com/tonc/text/video.htm">here</a> (Section 4.5 specifically). We do this by loading r0 with the 
+	register address and r1 with the command and use a str instruction. For the str instruction "str A, [B,C]" this translates 
+	into "Store the 32-bit value from A into the address (B+C)".
+	
+	<br><br>
+	
+	If you have had previous experience with assembly you may have noticed we load a lot of data from addresses in memory when we 
+	could load them directly with something like a "mov" command. This is because of the limited space of THUMB instructions. The 
+	largest constant we can load into a register using a "mov" command is 255. To get around this, we store the required values in 
+	memory and load them using a "ldr" instruction, or "Load Register".
+	
+	<pre>
+	ldr r0, VRAMAddress
+	ldr r1, Colour
+	ldr r2, CanvasSizeDiv3	;Stores the VRAM address and colour to write
+	</pre>
+	
+	This section involves us loading the required variables for the drawing loop. This involves setting r0 to the start of VRAM, 
+	r1 to our colour of choice and r2 to the canvas size divided by 3 (required for drawing lines instead of filling the screen).
+	
+	<pre>
+DrawLoop:
+	strh r1,[r0,#0]		;Writes the colour to the VRAM address
+	add r0, r0, #6		;Moves 3 pixels forward
+	sub r2, r2, #1		;Minus one from the canvas counter
+	bne DrawLoop
+	
+Infinite:
+	b Infinite
+	</pre>
+
+	This is the section which actually does the drawing on the screen. It starts by setting the 2-byte pixel value at the VRAM 
+	address to our colour. We then increment the VRAM address by 6, or 3 2-byte pixels before subtracting 1 from the canvas size.
+	By doing this we set the conditional codes, a hidden register which keeps track of the result of the last instruction. We 
+	utilise this by using a bne, or "Branch if Not Equal" to stay in the drawing loop if r2 does not equal 0. If it does, we move 
+	on to Infinite, a simple infinite loop to keep the program running.
+	
+	<pre>
+	.align 4
+DisplayAddress:
+	.long 0x4000000		;The first I/O register
+	
+VRAMAddress:
+	.long 0x6000000		;The start of VRAM
+	
+Mode3BG2:
+	.int 0x0403		;The I/O command to set Mode 3
+	
+Colour:
+	.long 0x7AFB		;The colour to display
+	
+CanvasSizeDiv3:
+	.long 0x3200		;The canvas counter divided by 3
+	</pre>
+	
+	This is the section which defines all the required values for the code above. One important thing to recognise is the ".align 
+	4" command which makes sure the following instructions are aligned to 4 bytes, a requirement for the "ldr" command.
+	
+	<br><br>
+	
+	Well, there you go! Now you know how this program works, why don't you try a hand at some of these challenges?
+	
+	<ul>
+		<li>
+			Using <a href="http://www.budmelvin.com/dev/15bitconverter.html">this</a> site, try changing the colour of the lines drawn.
+		</li>
+		<li>
+			Try changing the program so that it fills the whole screen instead of just lines.
+		</li>
+		<li>
+			Try and change the program to only colour the bottom half of the screen.
+		</li>
+	</ul>
+	
+	While you do have a working ROM, this program will not run on the GBA. Why is that? Well, it all has to do with the 188 bytes 
+	reserved for the GBA header. And what is that? Well, stay tuned!
+	
+	<br><br>
+	
+	<div class="row">
+		<div class="column">
+			<a href="./page3.html">Part 3: Our first ROM</a>
+		</div>
+		<div class="column">
+			<a href="../index.html">Part 4: Our first ROM - An explanation</a>
+		</div>
+		<div class="column">
+			TO BE CONTINUED...
+		</div>
+	</div> 
+	
+</body>
+
+</html>
